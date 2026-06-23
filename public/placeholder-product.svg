@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+  <rect width="200" height="200" fill="#f5f0e8"/>
+  <circle cx="100" cy="85" r="38" fill="#e8d5b0" stroke="#c9a96e" stroke-width="3"/>
+  <ellipse cx="100" cy="85" rx="25" ry="12" fill="#c9a96e" opacity="0.4"/>
+  <path d="M62 130 Q100 110 138 130 Q138 155 100 160 Q62 155 62 130Z" fill="#e8d5b0" stroke="#c9a96e" stroke-width="3"/>
+  <path d="M75 130 Q100 118 125 130" stroke="#c9a96e" stroke-width="2" fill="none"/>
+  <text x="100" y="185" font-family="sans-serif" font-size="12" fill="#9b7b4a" text-anchor="middle">מוצר</text>
+</svg>
