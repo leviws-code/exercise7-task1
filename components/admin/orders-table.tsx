@@ -13,6 +13,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import { OrderStatusBadge } from '@/components/orders/order-status-badge'
 import { OrderDetailDialog } from '@/components/orders/order-detail-dialog'
+import { EmailDialog } from '@/components/admin/email-dialog'
 import { updateOrderStatus, updateOrderPaid } from '@/lib/actions/orders'
 import type { OrderStatus, OrderWithItems } from '@/lib/types'
 
@@ -24,6 +25,8 @@ export function OrdersTable({ orders }: { orders: OrderWithItems[] }) {
   const [, startTransition] = useTransition()
   const [selectedOrder, setSelectedOrder] = useState<OrderWithItems | null>(null)
   const [dialogOpen, setDialogOpen] = useState(false)
+  const [emailOrder, setEmailOrder] = useState<OrderWithItems | null>(null)
+  const [emailDialogOpen, setEmailDialogOpen] = useState(false)
 
   const [search, setSearch] = useState(searchParams.get('search') ?? '')
   const [statusFilter, setStatusFilter] = useState(searchParams.get('status') ?? '')
@@ -116,7 +119,7 @@ export function OrdersTable({ orders }: { orders: OrderWithItems[] }) {
               <TableHead>סכום</TableHead>
               <TableHead>סטטוס</TableHead>
               <TableHead>שולם</TableHead>
-              <TableHead></TableHead>
+              <TableHead className="w-32"></TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -157,13 +160,22 @@ export function OrdersTable({ orders }: { orders: OrderWithItems[] }) {
                   />
                 </TableCell>
                 <TableCell>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    onClick={() => { setSelectedOrder(order); setDialogOpen(true) }}
-                  >
-                    פרטים
-                  </Button>
+                  <div className="flex gap-1">
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => { setSelectedOrder(order); setDialogOpen(true) }}
+                    >
+                      פרטים
+                    </Button>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => { setEmailOrder(order); setEmailDialogOpen(true) }}
+                    >
+                      מייל
+                    </Button>
+                  </div>
                 </TableCell>
               </TableRow>
             ))}
@@ -175,6 +187,12 @@ export function OrdersTable({ orders }: { orders: OrderWithItems[] }) {
         order={selectedOrder}
         open={dialogOpen}
         onOpenChange={setDialogOpen}
+      />
+
+      <EmailDialog
+        order={emailOrder}
+        open={emailDialogOpen}
+        onOpenChange={setEmailDialogOpen}
       />
     </div>
   )
